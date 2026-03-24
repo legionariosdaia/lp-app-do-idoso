@@ -1,16 +1,604 @@
-// Update this page (the content is just a fallback if you fail to update the page)
+import { useState, useEffect, useRef } from "react";
+import { motion, useInView } from "framer-motion";
+import {
+  Heart, Menu, X, Play, Tag, Stethoscope, Calendar, Pill, ShieldAlert,
+  Syringe, MessageCircleHeart, Bot, Gamepad2, Crown, Users, Check,
+  ChevronRight, Phone, Mail, Star
+} from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 
-// IMPORTANT: Fully REPLACE this with your own code
-const PlaceholderIndex = () => {
-  // PLACEHOLDER: Replace this entire return statement with the user's app.
-  // The inline background color is intentionally not part of the design system.
-  return (
-    <div className="flex min-h-screen items-center justify-center" style={{ backgroundColor: '#fcfbf8' }}>
-      <img data-lovable-blank-page-placeholder="REMOVE_THIS" src="/placeholder.svg" alt="Your app will live here!" />
-    </div>
-  );
+import heroImg from "@/assets/hero-elderly-happy.jpg";
+import sosImg from "@/assets/sos-section.jpg";
+import doctorsImg from "@/assets/doctors-section.jpg";
+import ctaFamilyImg from "@/assets/cta-family.jpg";
+import testimonialMaria from "@/assets/testimonial-maria.jpg";
+import testimonialJose from "@/assets/testimonial-jose.jpg";
+import testimonialAparecida from "@/assets/testimonial-aparecida.jpg";
+import testimonialRicardo from "@/assets/testimonial-ricardo.jpg";
+import testimonialFernanda from "@/assets/testimonial-fernanda.jpg";
+import testimonialAna from "@/assets/testimonial-ana.jpg";
+import screenMedicos from "@/assets/screen-medicos.png";
+import screenConsultas from "@/assets/screen-consultas.png";
+import screenRemedios from "@/assets/screen-remedios.png";
+import screenSos from "@/assets/screen-sos.png";
+import screenVacinas from "@/assets/screen-vacinas.png";
+import screenMensagem from "@/assets/screen-mensagem.png";
+import screenChat from "@/assets/screen-chat.png";
+import screenJogos from "@/assets/screen-jogos.png";
+
+const CTA_URL = "https://appdoidoso.com.br";
+const WHATSAPP_URL = "https://wa.me/5511940750736";
+
+const fadeUp = {
+  hidden: { opacity: 0, y: 30 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.6 } },
 };
 
-const Index = PlaceholderIndex;
+function CountUp({ target, suffix = "" }: { target: number; suffix?: string }) {
+  const [count, setCount] = useState(0);
+  const ref = useRef<HTMLSpanElement>(null);
+  const inView = useInView(ref, { once: true });
+  useEffect(() => {
+    if (!inView) return;
+    let start = 0;
+    const step = Math.ceil(target / 60);
+    const interval = setInterval(() => {
+      start += step;
+      if (start >= target) { setCount(target); clearInterval(interval); }
+      else setCount(start);
+    }, 20);
+    return () => clearInterval(interval);
+  }, [inView, target]);
+  return <span ref={ref}>{count.toLocaleString("pt-BR")}{suffix}</span>;
+}
 
-export default Index;
+function PhoneMockup({ src, alt, neonColor }: { src: string; alt: string; neonColor: string }) {
+  return (
+    <div className="relative mx-auto w-[220px] md:w-[260px]">
+      <div
+        className="absolute inset-0 rounded-[2.5rem] blur-2xl opacity-40"
+        style={{ background: neonColor }}
+      />
+      <div className="relative rounded-[2.5rem] border-4 border-foreground/20 bg-foreground/5 p-2 shadow-2xl overflow-hidden">
+        <div className="w-full rounded-[2rem] overflow-hidden bg-card">
+          <img src={src} alt={alt} loading="lazy" className="w-full h-auto" />
+        </div>
+      </div>
+    </div>
+  );
+}
+
+const features = [
+  { title: "Médicos", icon: Stethoscope, desc: "Cadastre todos os médicos com endereço, telefone e especialidade. Nunca mais perca um contato.", screen: screenMedicos, neon: "#2563EB" },
+  { title: "Consultas", icon: Calendar, desc: "Agende consultas, receba lembretes automáticos e nunca mais esqueça um compromisso médico.", screen: screenConsultas, neon: "#16A34A" },
+  { title: "Remédios", icon: Pill, desc: "Controle todos os medicamentos com alarmes inteligentes. Envie a lista completa para o médico pelo WhatsApp com um toque.", screen: screenRemedios, neon: "#D97706" },
+  { title: "SOS Emergência", icon: ShieldAlert, desc: "Botão de pânico que envia localização GPS em tempo real para todos os contatos de emergência via WhatsApp.", screen: screenSos, neon: "#DC2626" },
+  { title: "Vacinas", icon: Syringe, desc: "Controle completo do calendário vacinal com doses, datas e lembretes automáticos.", screen: screenVacinas, neon: "#7C3AED" },
+  { title: "Mensagem do Dia", icon: MessageCircleHeart, desc: "Mensagem diária carinhosa e motivacional gerada por IA para alegrar o dia do idoso.", screen: screenMensagem, neon: "#EC4899" },
+  { title: "Chat Amigo", icon: Bot, desc: "Assistente virtual com IA que conversa, responde dúvidas, lê mensagens em voz alta e aceita comandos de voz.", screen: screenChat, neon: "#06B6D4" },
+  { title: "Jogos Cognitivos", icon: Gamepad2, desc: "6 jogos para exercitar a memória e o raciocínio: Memória, Sudoku, Caça-Palavras, Jogo da Velha, Gênio e Trivia.", screen: screenJogos, neon: "#EA580C" },
+];
+
+const testimonials = [
+  { name: "Dona Maria", age: "67 anos", role: "Idosa", img: testimonialMaria, text: "Eu tomava 8 remédios e vivia confusa com os horários. Agora o aplicativo me avisa certinho. Nunca mais esqueci nenhum! E ainda jogo o jogo da memória todo dia." },
+  { name: "Seu José", age: "73 anos", role: "Idoso", img: testimonialJose, text: "Moro sozinho e meus filhos ficavam preocupados. Com o botão SOS, eles sabem onde estou a qualquer momento. Me sinto mais seguro." },
+  { name: "Dona Aparecida", age: "62 anos", role: "Idosa", img: testimonialAparecida, text: "As consultas médicas eram um caos. Agora tenho tudo organizado no celular. Meu neto me ajudou a instalar e é muito fácil de usar!" },
+  { name: "Ricardo", age: "42 anos", role: "Filho de idoso", img: testimonialRicardo, text: "Meu pai tem Alzheimer e o SOS já nos salvou duas vezes. Ele saiu de casa e conseguimos encontrá-lo rapidamente pela localização. Não tem preço." },
+  { name: "Fernanda", age: "38 anos", role: "Filha de idosa", img: testimonialFernanda, text: "Minha mãe mora em outra cidade. Com o app, acompanho os medicamentos, consultas e vacinas dela à distância. É como estar perto mesmo longe." },
+  { name: "Ana Paula", age: "35 anos", role: "Cuidadora de idosos", img: testimonialAna, text: "Cuido de 3 idosos e o App do Idoso revolucionou minha rotina. Consigo gerenciar todos os medicamentos e consultas sem erro. Recomendo para todos os cuidadores." },
+];
+
+const audiences = [
+  { emoji: "👴👵", title: "Idosos", desc: "Para quem quer manter a saúde organizada de forma simples e independente" },
+  { emoji: "👨‍👩‍👧", title: "Filhos de Idosos", desc: "Acompanhe a saúde dos seus pais mesmo à distância, com segurança" },
+  { emoji: "🤝", title: "Cuidadores", desc: "Gerencie múltiplos idosos com eficiência e sem erros" },
+  { emoji: "🩺", title: "Enfermeiros", desc: "Ferramenta profissional para acompanhamento de pacientes idosos" },
+  { emoji: "🏠", title: "Casas de Repouso", desc: "Controle centralizado de medicamentos, vacinas e consultas dos residentes" },
+  { emoji: "❤️", title: "Familiares de Idosos", desc: "Tenha tranquilidade sabendo que seu familiar está protegido" },
+  { emoji: "👨‍⚕️", title: "Médicos Geriatras", desc: "Receba listas de medicamentos dos pacientes e acompanhe de perto" },
+  { emoji: "💊", title: "Pessoas com muitos medicamentos", desc: "Não é idoso mas toma muitos remédios? O app também é para você!" },
+  { emoji: "🧠", title: "Famílias de pessoas com Alzheimer", desc: "O botão SOS com GPS em tempo real traz segurança para toda a família" },
+];
+
+const faqs = [
+  { q: "O App do Idoso é difícil de usar?", a: "Não! O app foi projetado especialmente para idosos, com letras grandes, botões coloridos e acessíveis, e um assistente virtual que lê tudo em voz alta. Qualquer pessoa consegue usar." },
+  { q: "Preciso de internet para usar?", a: "Sim, é necessário conexão com a internet para acessar todas as funcionalidades. Mas é muito leve e funciona bem até com internet lenta." },
+  { q: "Posso cancelar a qualquer momento?", a: "Sim! Você pode cancelar sua assinatura a qualquer momento, sem taxas ou multas." },
+  { q: "O botão SOS funciona sem internet?", a: "O botão SOS precisa de internet para enviar a localização via WhatsApp. Recomendamos que o idoso tenha dados móveis ativados." },
+  { q: "Quantas pessoas podem usar o plano familiar?", a: "O plano familiar permite até 3 usuários, cada um com sua conta individual, medicamentos e consultas separados." },
+  { q: "Meus dados estão seguros?", a: "Sim! Utilizamos criptografia de ponta e servidores seguros. Seus dados de saúde são protegidos e nunca compartilhados com terceiros." },
+  { q: "Funciona no iPhone e Android?", a: "O App do Idoso é um aplicativo web progressivo (PWA) que funciona em qualquer celular com navegador de internet, seja iPhone, Android ou tablet." },
+  { q: "Posso usar mesmo não sendo idoso?", a: "Claro! Qualquer pessoa que toma muitos medicamentos, tem várias consultas ou precisa se organizar com a saúde pode usar o App do Idoso." },
+];
+
+const planFeatures = [
+  "Cadastro de Médicos", "Agendamento de Consultas", "Controle de Remédios",
+  "Botão SOS Emergência", "Calendário de Vacinas", "Mensagem do Dia",
+  "Chat Amigo com IA", "Jogos Cognitivos", "Suporte por WhatsApp",
+];
+
+export default function Index() {
+  const [mobileOpen, setMobileOpen] = useState(false);
+  const [videoUrl, setVideoUrl] = useState("");
+  const [videoInput, setVideoInput] = useState("");
+
+  const scrollTo = (id: string) => {
+    document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
+    setMobileOpen(false);
+  };
+
+  const getYouTubeEmbedUrl = (url: string) => {
+    const match = url.match(/(?:youtu\.be\/|youtube\.com\/(?:watch\?v=|embed\/))([^&?\s]+)/);
+    return match ? `https://www.youtube.com/embed/${match[1]}` : null;
+  };
+
+  const navLinks = [
+    { label: "Funcionalidades", id: "funcionalidades" },
+    { label: "Depoimentos", id: "depoimentos" },
+    { label: "Preços", id: "precos" },
+    { label: "FAQ", id: "faq" },
+  ];
+
+  return (
+    <div className="min-h-screen bg-background font-nunito">
+      {/* NAVBAR */}
+      <nav className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-lg border-b border-border">
+        <div className="container mx-auto flex items-center justify-between h-16 px-4">
+          <a href="/" className="flex items-center gap-2 text-primary font-black text-xl">
+            <Heart className="w-7 h-7 fill-primary text-primary-foreground" />
+            App do Idoso
+          </a>
+          <div className="hidden md:flex items-center gap-6">
+            {navLinks.map(l => (
+              <button key={l.id} onClick={() => scrollTo(l.id)} className="text-foreground/80 hover:text-primary font-semibold transition-colors text-base">
+                {l.label}
+              </button>
+            ))}
+            <Button asChild className="rounded-full px-6 font-bold">
+              <a href={CTA_URL} target="_blank" rel="noopener noreferrer">Começar Agora</a>
+            </Button>
+          </div>
+          <Sheet open={mobileOpen} onOpenChange={setMobileOpen}>
+            <SheetTrigger asChild className="md:hidden">
+              <Button variant="ghost" size="icon"><Menu className="w-6 h-6" /></Button>
+            </SheetTrigger>
+            <SheetContent side="right" className="bg-background">
+              <div className="flex flex-col gap-6 mt-8">
+                {navLinks.map(l => (
+                  <button key={l.id} onClick={() => scrollTo(l.id)} className="text-lg font-semibold text-foreground/80 hover:text-primary text-left">
+                    {l.label}
+                  </button>
+                ))}
+                <Button asChild className="rounded-full font-bold w-full">
+                  <a href={CTA_URL} target="_blank" rel="noopener noreferrer">Começar Agora</a>
+                </Button>
+              </div>
+            </SheetContent>
+          </Sheet>
+        </div>
+      </nav>
+
+      {/* HERO */}
+      <section className="pt-24 pb-16 md:pt-32 md:pb-24 relative overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-br from-background via-background to-primary/5" />
+        <div className="container mx-auto px-4 relative z-10">
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
+            <motion.div initial="hidden" animate="visible" variants={fadeUp}>
+              <Badge className="bg-accent/20 text-accent-foreground border-accent text-sm px-4 py-1.5 mb-6 font-semibold" style={{ color: "hsl(var(--foreground))" }}>
+                ✨ +10.000 famílias já confiam no App do Idoso
+              </Badge>
+              <h1 className="text-3xl md:text-5xl lg:text-6xl font-black text-foreground leading-tight mb-6">
+                Cuide de quem sempre cuidou de você.{" "}
+                <span className="text-primary">Com carinho, tecnologia e segurança.</span>
+              </h1>
+              <p className="text-lg md:text-xl text-muted-foreground mb-8 leading-relaxed">
+                O aplicativo mais completo para gestão da saúde, medicamentos, consultas e segurança de idosos. Simples de usar, feito com amor.
+              </p>
+              <div className="flex flex-col sm:flex-row gap-4 mb-4">
+                <Button asChild size="lg" className="rounded-full text-lg px-8 py-6 font-bold animate-pulse-glow">
+                  <a href={CTA_URL} target="_blank" rel="noopener noreferrer">
+                    <Play className="w-5 h-5 mr-2" /> Começar Teste Grátis de 7 Dias
+                  </a>
+                </Button>
+                <Button variant="outline" size="lg" className="rounded-full text-lg px-8 py-6 font-bold" onClick={() => scrollTo("precos")}>
+                  <Tag className="w-5 h-5 mr-2" /> Ver Planos
+                </Button>
+              </div>
+              <p className="text-sm text-muted-foreground">✅ Sem cartão de crédito • ✅ Cancele quando quiser</p>
+            </motion.div>
+
+            <motion.div initial={{ opacity: 0, x: 40 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.8, delay: 0.3 }}>
+              {videoUrl ? (
+                <div className="rounded-2xl overflow-hidden shadow-2xl border-2 border-primary/20" style={{ boxShadow: "0 0 40px rgba(37,99,235,0.2)" }}>
+                  <div className="relative w-full" style={{ paddingBottom: "56.25%" }}>
+                    <iframe src={getYouTubeEmbedUrl(videoUrl) || ""} className="absolute inset-0 w-full h-full" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen title="VSL App do Idoso" />
+                  </div>
+                </div>
+              ) : (
+                <Dialog>
+                  <DialogTrigger asChild>
+                    <div className="relative rounded-2xl overflow-hidden cursor-pointer group" style={{ boxShadow: "0 0 40px rgba(37,99,235,0.15)" }}>
+                      <img src={heroImg} alt="Idoso feliz usando o App do Idoso" width={1920} height={1080} className="w-full h-auto" />
+                      <div className="absolute inset-0 bg-foreground/30 flex flex-col items-center justify-center gap-3 group-hover:bg-foreground/40 transition-colors">
+                        <div className="w-20 h-20 rounded-full bg-primary flex items-center justify-center shadow-xl">
+                          <Play className="w-10 h-10 text-primary-foreground ml-1" />
+                        </div>
+                        <p className="text-primary-foreground font-bold text-lg text-center px-4">Assista e descubra como o App do Idoso pode transformar sua vida</p>
+                      </div>
+                    </div>
+                  </DialogTrigger>
+                  <DialogContent className="sm:max-w-md">
+                    <DialogHeader>
+                      <DialogTitle>Adicionar Vídeo do YouTube</DialogTitle>
+                    </DialogHeader>
+                    <div className="flex flex-col gap-4">
+                      <input
+                        type="text"
+                        placeholder="Cole a URL do YouTube aqui..."
+                        value={videoInput}
+                        onChange={e => setVideoInput(e.target.value)}
+                        className="w-full px-4 py-3 rounded-lg border border-input bg-background text-foreground text-base"
+                      />
+                      <Button onClick={() => { if (videoInput) setVideoUrl(videoInput); }} className="rounded-full font-bold">
+                        Adicionar Vídeo
+                      </Button>
+                    </div>
+                  </DialogContent>
+                </Dialog>
+              )}
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
+      {/* TRUST BAR */}
+      <section className="bg-primary py-8">
+        <div className="container mx-auto px-4">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-primary-foreground text-center">
+            {[
+              { emoji: "👴", label: "Usuários Ativos", value: 10000, prefix: "+" },
+              { emoji: "⭐", label: "Avaliação", value: 4.9, suffix: "", isDecimal: true },
+              { emoji: "🔒", label: "Seguro", value: 100, suffix: "%" },
+              { emoji: "❤️", label: "Feito no Brasil", value: 0, isStatic: true },
+            ].map((m, i) => (
+              <div key={i} className="flex flex-col items-center gap-1">
+                <span className="text-3xl">{m.emoji}</span>
+                <span className="text-2xl md:text-3xl font-black">
+                  {m.isStatic ? "🇧🇷" : m.isDecimal ? "4.9" : <><CountUp target={m.value} suffix={m.suffix || ""} /></>}
+                  {m.prefix && !m.isStatic && !m.isDecimal ? "" : ""}
+                </span>
+                <span className="text-sm font-semibold opacity-90">{m.label}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* FEATURES */}
+      <section id="funcionalidades" className="py-16 md:py-24">
+        <div className="container mx-auto px-4">
+          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} className="text-center mb-16">
+            <h2 className="text-3xl md:text-4xl font-black text-foreground mb-4">
+              Tudo que seu idoso precisa, na palma da mão
+            </h2>
+            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+              8 funções essenciais projetadas com letras grandes, botões acessíveis e cores de alto contraste
+            </p>
+          </motion.div>
+          <div className="grid md:grid-cols-2 gap-12 md:gap-16">
+            {features.map((f, i) => {
+              const Icon = f.icon;
+              const isReversed = i % 2 === 1;
+              return (
+                <motion.div key={i} initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp}
+                  className={`flex flex-col ${isReversed ? "md:flex-row-reverse" : "md:flex-row"} items-center gap-8`}>
+                  <div className="flex-shrink-0">
+                    <PhoneMockup src={f.screen} alt={`Tela ${f.title}`} neonColor={f.neon} />
+                  </div>
+                  <div className="text-center md:text-left">
+                    <div className="flex items-center justify-center md:justify-start gap-3 mb-3">
+                      <div className="w-12 h-12 rounded-xl flex items-center justify-center" style={{ backgroundColor: f.neon + "22", color: f.neon }}>
+                        <Icon className="w-6 h-6" />
+                      </div>
+                      <h3 className="text-xl font-black text-foreground">{f.title}</h3>
+                    </div>
+                    <p className="text-muted-foreground text-base leading-relaxed">{f.desc}</p>
+                  </div>
+                </motion.div>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
+      {/* SOS HIGHLIGHT */}
+      <section className="py-16 md:py-24 relative overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-br from-destructive/10 to-destructive/5" />
+        <div className="container mx-auto px-4 relative z-10">
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
+            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp}>
+              <Badge className="bg-destructive/20 text-destructive border-destructive mb-4 font-bold">🚨 Função Essencial</Badge>
+              <h2 className="text-3xl md:text-4xl font-black text-foreground mb-6">
+                O botão que pode salvar uma vida
+              </h2>
+              <p className="text-lg text-muted-foreground mb-8 leading-relaxed">
+                Com um único toque, o App do Idoso envia a localização exata em tempo real para todos os contatos de emergência via WhatsApp. Para idosos com Alzheimer, mobilidade reduzida ou que moram sozinhos — é paz de espírito para toda a família.
+              </p>
+              <Button asChild size="lg" className="rounded-full bg-destructive hover:bg-destructive/90 text-destructive-foreground font-bold text-lg px-8 py-6">
+                <a href={CTA_URL} target="_blank" rel="noopener noreferrer">
+                  <ShieldAlert className="w-5 h-5 mr-2" /> Proteja quem você ama
+                </a>
+              </Button>
+            </motion.div>
+            <motion.div initial={{ opacity: 0, scale: 0.9 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true }} transition={{ duration: 0.6 }}>
+              <img src={sosImg} alt="Função SOS do App do Idoso" loading="lazy" width={1280} height={720} className="rounded-2xl shadow-xl w-full" />
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
+      {/* DOCTORS HIGHLIGHT */}
+      <section className="py-16 md:py-24 relative overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-primary/10" />
+        <div className="container mx-auto px-4 relative z-10">
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
+            <motion.div initial={{ opacity: 0, scale: 0.9 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true }} transition={{ duration: 0.6 }} className="order-2 lg:order-1">
+              <img src={doctorsImg} alt="Médico usando o App do Idoso" loading="lazy" width={1280} height={720} className="rounded-2xl shadow-xl w-full" />
+            </motion.div>
+            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} className="order-1 lg:order-2">
+              <Badge className="bg-primary/20 text-primary border-primary mb-4 font-bold">👨‍⚕️ Para Profissionais de Saúde</Badge>
+              <h2 className="text-3xl md:text-4xl font-black text-foreground mb-6">
+                Médicos: Receba a lista completa de medicamentos do seu paciente
+              </h2>
+              <p className="text-lg text-muted-foreground mb-8 leading-relaxed">
+                Seus pacientes idosos podem enviar a lista completa de medicamentos diretamente pelo WhatsApp. Com nome, concentração, dosagem e horários. Chega de listas escritas à mão ilegíveis.
+              </p>
+              <Button asChild size="lg" className="rounded-full font-bold text-lg px-8 py-6">
+                <a href={CTA_URL} target="_blank" rel="noopener noreferrer">
+                  Indique para seus pacientes <ChevronRight className="w-5 h-5 ml-2" />
+                </a>
+              </Button>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
+      {/* TESTIMONIALS */}
+      <section id="depoimentos" className="py-16 md:py-24 bg-muted/30">
+        <div className="container mx-auto px-4">
+          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} className="text-center mb-16">
+            <h2 className="text-3xl md:text-4xl font-black text-foreground mb-4">
+              Veja o que dizem sobre o App do Idoso
+            </h2>
+            <p className="text-lg text-muted-foreground">Histórias reais de quem já transformou o cuidado com a saúde</p>
+          </motion.div>
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {testimonials.map((t, i) => (
+              <motion.div key={i} initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp}>
+                <Card className="h-full hover:scale-[1.02] transition-transform duration-300 border-border/50 shadow-md">
+                  <CardContent className="p-6">
+                    <div className="flex items-center gap-4 mb-4">
+                      <img src={t.img} alt={t.name} loading="lazy" width={56} height={56} className="w-14 h-14 rounded-full object-cover" />
+                      <div>
+                        <p className="font-bold text-foreground">{t.name}, {t.age}</p>
+                        <p className="text-sm text-muted-foreground">{t.role}</p>
+                      </div>
+                    </div>
+                    <div className="flex gap-1 mb-3">
+                      {Array(5).fill(0).map((_, j) => <Star key={j} className="w-4 h-4 fill-elderly-gold text-elderly-gold" />)}
+                    </div>
+                    <p className="text-muted-foreground leading-relaxed">"{t.text}"</p>
+                  </CardContent>
+                </Card>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* TARGET AUDIENCES */}
+      <section className="py-16 md:py-24">
+        <div className="container mx-auto px-4">
+          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} className="text-center mb-16">
+            <h2 className="text-3xl md:text-4xl font-black text-foreground mb-4">
+              Para quem é o App do Idoso?
+            </h2>
+            <p className="text-lg text-muted-foreground">Feito para todos que se preocupam com a saúde e segurança de quem amam</p>
+          </motion.div>
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-6">
+            {audiences.map((a, i) => (
+              <motion.div key={i} initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp}>
+                <Card className="h-full text-center hover:shadow-lg transition-shadow border-border/50">
+                  <CardContent className="p-6">
+                    <span className="text-4xl mb-3 block">{a.emoji}</span>
+                    <h3 className="font-bold text-foreground mb-2 text-sm md:text-base">{a.title}</h3>
+                    <p className="text-xs md:text-sm text-muted-foreground">{a.desc}</p>
+                  </CardContent>
+                </Card>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* PRICING */}
+      <section id="precos" className="py-16 md:py-24 bg-muted/30">
+        <div className="container mx-auto px-4">
+          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} className="text-center mb-16">
+            <h2 className="text-3xl md:text-4xl font-black text-foreground mb-4">
+              Invista no cuidado de quem você ama
+            </h2>
+            <p className="text-lg text-muted-foreground">Comece com 7 dias grátis. Sem cartão de crédito.</p>
+          </motion.div>
+          <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto mb-12">
+            {/* Individual */}
+            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp}>
+              <Card className="h-full hover:scale-[1.02] transition-transform duration-300">
+                <CardHeader className="text-center pb-2">
+                  <Crown className="w-10 h-10 mx-auto text-elderly-gold mb-2" />
+                  <CardTitle className="text-xl">Plano Individual</CardTitle>
+                  <p className="text-muted-foreground text-sm">Para 1 usuário</p>
+                </CardHeader>
+                <CardContent className="text-center">
+                  <div className="mb-6">
+                    <span className="text-4xl font-black text-foreground">R$ 17,30</span>
+                    <span className="text-muted-foreground"> /mês</span>
+                  </div>
+                  <ul className="text-left space-y-3 mb-8">
+                    {planFeatures.map((f, i) => (
+                      <li key={i} className="flex items-center gap-2 text-sm text-muted-foreground">
+                        <Check className="w-4 h-4 text-success flex-shrink-0" /> {f}
+                      </li>
+                    ))}
+                  </ul>
+                  <Button asChild variant="outline" className="w-full rounded-full font-bold text-base py-5">
+                    <a href={CTA_URL} target="_blank" rel="noopener noreferrer">Começar Teste Grátis</a>
+                  </Button>
+                </CardContent>
+              </Card>
+            </motion.div>
+            {/* Familiar */}
+            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp}>
+              <Card className="h-full border-2 border-primary shadow-xl hover:scale-[1.02] transition-transform duration-300 relative overflow-hidden">
+                <div className="absolute top-0 left-0 right-0 bg-primary text-primary-foreground text-center py-1.5 text-sm font-bold">
+                  ⭐ MAIS POPULAR
+                </div>
+                <CardHeader className="text-center pb-2 pt-10">
+                  <Users className="w-10 h-10 mx-auto text-primary mb-2" />
+                  <CardTitle className="text-xl">Plano Familiar</CardTitle>
+                  <p className="text-muted-foreground text-sm">Até 3 usuários com contas individuais</p>
+                </CardHeader>
+                <CardContent className="text-center">
+                  <div className="mb-6">
+                    <span className="text-4xl font-black text-foreground">R$ 34,60</span>
+                    <span className="text-muted-foreground"> /mês</span>
+                  </div>
+                  <ul className="text-left space-y-3 mb-8">
+                    {[...planFeatures, "Gestão Familiar"].map((f, i) => (
+                      <li key={i} className="flex items-center gap-2 text-sm text-muted-foreground">
+                        <Check className="w-4 h-4 text-success flex-shrink-0" /> {f}
+                      </li>
+                    ))}
+                  </ul>
+                  <Button asChild className="w-full rounded-full font-bold text-base py-5">
+                    <a href={CTA_URL} target="_blank" rel="noopener noreferrer">Começar Teste Grátis</a>
+                  </Button>
+                </CardContent>
+              </Card>
+            </motion.div>
+          </div>
+          {/* Savings */}
+          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp}>
+            <div className="max-w-2xl mx-auto bg-primary/5 border border-primary/20 rounded-2xl p-6 text-center">
+              <p className="font-black text-lg text-foreground mb-2">💰 Economize ainda mais!</p>
+              <p className="text-muted-foreground mb-1">📅 Plano Semestral: Ganhe 1 mês GRÁTIS</p>
+              <p className="text-muted-foreground mb-3">📅 Plano Anual: Ganhe 2 meses GRÁTIS</p>
+              <p className="text-xs text-muted-foreground">Os descontos são aplicados automaticamente ao escolher o período no checkout</p>
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* FAQ */}
+      <section id="faq" className="py-16 md:py-24">
+        <div className="container mx-auto px-4 max-w-3xl">
+          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} className="text-center mb-16">
+            <h2 className="text-3xl md:text-4xl font-black text-foreground mb-4">
+              Perguntas Frequentes
+            </h2>
+          </motion.div>
+          <Accordion type="single" collapsible className="space-y-3">
+            {faqs.map((f, i) => (
+              <AccordionItem key={i} value={`faq-${i}`} className="border rounded-xl px-4 bg-card shadow-sm">
+                <AccordionTrigger className="text-base font-bold text-foreground text-left hover:no-underline">
+                  {f.q}
+                </AccordionTrigger>
+                <AccordionContent className="text-muted-foreground text-base leading-relaxed">
+                  {f.a}
+                </AccordionContent>
+              </AccordionItem>
+            ))}
+          </Accordion>
+        </div>
+      </section>
+
+      {/* FINAL CTA */}
+      <section className="py-16 md:py-24 relative overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-br from-primary to-primary/80" />
+        <img src={ctaFamilyImg} alt="Família feliz" loading="lazy" className="absolute inset-0 w-full h-full object-cover opacity-20 mix-blend-overlay" />
+        <div className="container mx-auto px-4 relative z-10 text-center">
+          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp}>
+            <h2 className="text-3xl md:text-5xl font-black text-primary-foreground mb-6">
+              Comece hoje. Cuide com amor.<br />Cuide com o App do Idoso.
+            </h2>
+            <p className="text-xl text-primary-foreground/90 mb-8">
+              7 dias grátis. Sem compromisso. Sem cartão de crédito.
+            </p>
+            <Button asChild size="lg" variant="outline" className="rounded-full text-lg px-10 py-7 font-black bg-primary-foreground text-primary hover:bg-primary-foreground/90 border-0 shadow-xl">
+              <a href={CTA_URL} target="_blank" rel="noopener noreferrer">
+                Começar Meu Teste Grátis Agora
+              </a>
+            </Button>
+            <p className="mt-6 text-primary-foreground/80 font-semibold">Mais de 10.000 famílias já confiam em nós ❤️</p>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* FOOTER */}
+      <footer className="bg-foreground text-background py-12">
+        <div className="container mx-auto px-4">
+          <div className="grid md:grid-cols-4 gap-8 mb-8">
+            <div>
+              <div className="flex items-center gap-2 font-black text-xl mb-4">
+                <Heart className="w-6 h-6 fill-primary text-primary" />
+                App do Idoso
+              </div>
+              <p className="text-background/60 text-sm">Cuidando de quem sempre cuidou de você.</p>
+            </div>
+            <div>
+              <h4 className="font-bold mb-3">Produto</h4>
+              <ul className="space-y-2 text-sm text-background/60">
+                <li><button onClick={() => scrollTo("funcionalidades")} className="hover:text-background transition-colors">Funcionalidades</button></li>
+                <li><button onClick={() => scrollTo("precos")} className="hover:text-background transition-colors">Preços</button></li>
+                <li><button onClick={() => scrollTo("faq")} className="hover:text-background transition-colors">FAQ</button></li>
+              </ul>
+            </div>
+            <div>
+              <h4 className="font-bold mb-3">Legal</h4>
+              <ul className="space-y-2 text-sm text-background/60">
+                <li><a href="#" className="hover:text-background transition-colors">Termos de Uso</a></li>
+                <li><a href="#" className="hover:text-background transition-colors">Política de Privacidade</a></li>
+                <li><a href="#" className="hover:text-background transition-colors">Política de Reembolso</a></li>
+                <li><a href="#" className="hover:text-background transition-colors">LGPD</a></li>
+              </ul>
+            </div>
+            <div>
+              <h4 className="font-bold mb-3">Contato</h4>
+              <ul className="space-y-2 text-sm text-background/60">
+                <li>
+                  <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 hover:text-background transition-colors">
+                    <Phone className="w-4 h-4" /> +55 11 94075-0736
+                  </a>
+                </li>
+                <li>
+                  <a href="mailto:contato@appdoidoso.com.br" className="flex items-center gap-2 hover:text-background transition-colors">
+                    <Mail className="w-4 h-4" /> contato@appdoidoso.com.br
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div className="border-t border-background/20 pt-6 text-center text-sm text-background/50">
+            <p className="mb-1">Edu d'Olivee Negócios Digitais Ltda • CNPJ: 58.345.667/0001-06</p>
+            <p>© 2025 App do Idoso. Todos os direitos reservados.</p>
+          </div>
+        </div>
+      </footer>
+    </div>
+  );
+}
