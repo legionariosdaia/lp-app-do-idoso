@@ -127,6 +127,8 @@ export default function Index() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [videoUrl, setVideoUrl] = useState("");
   const [videoInput, setVideoInput] = useState("");
+  const [doctorModalOpen, setDoctorModalOpen] = useState(false);
+  const [doctorName, setDoctorName] = useState("");
 
   const scrollTo = (id: string) => {
     document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
