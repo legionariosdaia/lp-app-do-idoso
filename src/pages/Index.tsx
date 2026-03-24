@@ -3,8 +3,9 @@ import { motion, useInView } from "framer-motion";
 import {
   Heart, Menu, X, Play, Tag, Stethoscope, Calendar, Pill, ShieldAlert,
   Syringe, MessageCircleHeart, Bot, Gamepad2, Crown, Users, Check,
-  ChevronRight, Phone, Mail, Star
+  ChevronRight, Phone, Mail, Star, Send
 } from "lucide-react";
+import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -358,11 +359,37 @@ export default function Index() {
               <p className="text-lg text-muted-foreground mb-8 leading-relaxed">
                 Seus pacientes idosos podem enviar a lista completa de medicamentos diretamente pelo WhatsApp. Com nome, concentração, dosagem e horários. Chega de listas escritas à mão ilegíveis.
               </p>
-              <Button asChild size="lg" className="rounded-full font-bold text-lg px-8 py-6">
-                <a href={CTA_URL} target="_blank" rel="noopener noreferrer">
-                  Indique para seus pacientes <ChevronRight className="w-5 h-5 ml-2" />
-                </a>
-              </Button>
+              <Dialog open={doctorModalOpen} onOpenChange={setDoctorModalOpen}>
+                <DialogTrigger asChild>
+                  <Button size="lg" className="rounded-full font-bold text-lg px-8 py-6">
+                    Indique para seus pacientes <ChevronRight className="w-5 h-5 ml-2" />
+                  </Button>
+                </DialogTrigger>
+                <DialogContent className="rounded-2xl">
+                  <DialogHeader>
+                    <DialogTitle className="text-xl font-black text-foreground">Qual o seu nome?</DialogTitle>
+                  </DialogHeader>
+                  <form onSubmit={(e) => {
+                    e.preventDefault();
+                    if (!doctorName.trim()) return;
+                    const msg = encodeURIComponent(`Olá! ${doctorName.trim()} indicou o App do Idoso para você. Um aplicativo completo para gestão da saúde de idosos: medicamentos, consultas, vacinas, SOS e muito mais. Experimente grátis por 7 dias: http://appdoidoso.com.br`);
+                    window.open(`https://wa.me/?text=${msg}`, "_blank");
+                    setDoctorModalOpen(false);
+                    setDoctorName("");
+                  }} className="flex flex-col gap-4">
+                    <Input
+                      placeholder="Digite seu nome"
+                      value={doctorName}
+                      onChange={(e) => setDoctorName(e.target.value)}
+                      className="rounded-xl text-base"
+                      required
+                    />
+                    <Button type="submit" size="lg" className="rounded-full font-bold">
+                      <Send className="w-4 h-4 mr-2" /> Enviar
+                    </Button>
+                  </form>
+                </DialogContent>
+              </Dialog>
             </motion.div>
           </div>
         </div>
