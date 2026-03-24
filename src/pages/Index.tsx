@@ -375,7 +375,8 @@ export default function Index() {
                     e.preventDefault();
                     if (!doctorName.trim()) return;
                     const msg = encodeURIComponent(`Olá! ${doctorName.trim()} indicou o App do Idoso para você. Um aplicativo completo para gestão da saúde de idosos: medicamentos, consultas, vacinas, SOS e muito mais. Experimente grátis por 7 dias: http://appdoidoso.com.br`);
-                    window.open(`https://wa.me/?text=${msg}`, "_blank");
+                    const url = `https://wa.me/?text=${msg}`;
+                    if (window.top) { window.top.open(url, "_blank"); } else { window.open(url, "_blank"); }
                     setDoctorModalOpen(false);
                     setDoctorName("");
                   }} className="flex flex-col gap-4">
