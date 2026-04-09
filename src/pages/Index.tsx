@@ -476,7 +476,7 @@ export default function Index() {
                 </CardHeader>
                 <CardContent className="text-center">
                   <div className="mb-6">
-                    <span className="text-4xl font-black text-foreground">R$ 17,30</span>
+                    <span className="text-4xl font-black text-foreground"><span className="text-4xl font-black text-foreground">R$ 27,30</span></span>
                     <span className="text-muted-foreground"> /mês</span>
                   </div>
                   <ul className="text-left space-y-3 mb-8">
@@ -505,7 +505,7 @@ export default function Index() {
                 </CardHeader>
                 <CardContent className="text-center">
                   <div className="mb-6">
-                    <span className="text-4xl font-black text-foreground">R$ 34,60</span>
+                    <span className="text-4xl font-black text-foreground"><span className="text-4xl font-black text-foreground">R$ 54,60</span></span>
                     <span className="text-muted-foreground"> /mês</span>
                   </div>
                   <ul className="text-left space-y-3 mb-8">
