@@ -424,7 +424,7 @@ export default function Index() {
           </motion.div>
 
           {/* Additional real testimonials - hidden until real content is available */}
-          <div className="hidden grid md:grid-cols-3 gap-6 mt-12">
+          <div className="hidden md:grid-cols-3 gap-6 mt-12">
             {[1, 2, 3].map((i) => (
               <Card key={i} className="h-full border-border/50 shadow-md">
                 <CardContent className="p-6">
