@@ -31,6 +31,7 @@ import screenVacinas from "@/assets/screen-vacinas.png";
 import screenMensagem from "@/assets/screen-mensagem.png";
 import screenChat from "@/assets/screen-chat.png";
 import screenJogos from "@/assets/screen-jogos.png";
+import founderImg from "@/assets/founder-eduardo.png";
 
 const CTA_URL = "https://appdoidoso.com.br";
 const WHATSAPP_URL = "https://wa.me/5511940750736";
@@ -80,7 +81,7 @@ const features = [
   { title: "Remédios", icon: Pill, desc: "Controle todos os medicamentos com alarmes inteligentes. Envie a lista completa para o médico pelo WhatsApp com um toque.", screen: screenRemedios, neon: "#D97706" },
   { title: "SOS Emergência", icon: ShieldAlert, desc: "Botão de pânico que envia localização GPS em tempo real para todos os contatos de emergência via WhatsApp.", screen: screenSos, neon: "#DC2626" },
   { title: "Vacinas", icon: Syringe, desc: "Controle completo do calendário vacinal com doses, datas e lembretes automáticos.", screen: screenVacinas, neon: "#7C3AED" },
-  { title: "Mensagem do Dia", icon: MessageCircleHeart, desc: "Mensagem diária carinhosa e motivacional gerada por IA para alegrar o dia do idoso.", screen: screenMensagem, neon: "#EC4899" },
+  { title: "Mensagem do Dia", icon: MessageCircleHeart, desc: "Versículo bíblico diário e mensagem motivacional gerada por IA para alegrar e fortalecer o dia do seu idoso. Cuidado que alimenta o corpo e a alma.", screen: screenMensagem, neon: "#EC4899" },
   { title: "Chat Amigo", icon: Bot, desc: "Assistente virtual com IA que conversa, responde dúvidas, lê mensagens em voz alta e aceita comandos de voz.", screen: screenChat, neon: "#06B6D4" },
   { title: "Jogos Cognitivos", icon: Gamepad2, desc: "6 jogos para exercitar a memória e o raciocínio: Memória, Sudoku, Caça-Palavras, Jogo da Velha, Gênio e Trivia.", screen: screenJogos, neon: "#EA580C" },
 ];
@@ -262,23 +263,9 @@ export default function Index() {
       {/* TRUST BAR */}
       <section className="bg-primary py-8">
         <div className="container mx-auto px-4">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-primary-foreground text-center">
-            {[
-              { emoji: "👴", label: "Usuários Ativos", value: 10000, prefix: "+" },
-              { emoji: "⭐", label: "Avaliação", value: 4.9, suffix: "", isDecimal: true },
-              { emoji: "🔒", label: "Seguro", value: 100, suffix: "%" },
-              { emoji: "❤️", label: "Feito no Brasil", value: 0, isStatic: true },
-            ].map((m, i) => (
-              <div key={i} className="flex flex-col items-center gap-1">
-                <span className="text-3xl">{m.emoji}</span>
-                <span className="text-2xl md:text-3xl font-black">
-                  {m.isStatic ? "🇧🇷" : m.isDecimal ? "4.9" : <><CountUp target={m.value} suffix={m.suffix || ""} /></>}
-                  {m.prefix && !m.isStatic && !m.isDecimal ? "" : ""}
-                </span>
-                <span className="text-sm font-semibold opacity-90">{m.label}</span>
-              </div>
-            ))}
-          </div>
+          <p className="text-primary-foreground text-center text-lg md:text-2xl font-black tracking-tight">
+            ✅ 7 dias grátis <span className="opacity-60 mx-2">•</span> ✅ Sem cartão de crédito <span className="opacity-60 mx-2">•</span> ✅ Cancele quando quiser
+          </p>
         </div>
       </section>
 
@@ -401,31 +388,59 @@ export default function Index() {
       {/* TESTIMONIALS */}
       <section id="depoimentos" className="py-16 md:py-24 bg-muted/30">
         <div className="container mx-auto px-4">
-          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} className="text-center mb-16">
+          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-black text-foreground mb-4">
               Veja o que dizem sobre o App do Idoso
             </h2>
-            <p className="text-lg text-muted-foreground">Histórias reais de quem já transformou o cuidado com a saúde</p>
+            <p className="text-lg text-muted-foreground">A história real que originou tudo.</p>
           </motion.div>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {testimonials.map((t, i) => (
-              <motion.div key={i} initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp}>
-                <Card className="h-full hover:scale-[1.02] transition-transform duration-300 border-border/50 shadow-md">
-                  <CardContent className="p-6">
-                    <div className="flex items-center gap-4 mb-4">
-                      <img src={t.img} alt={t.name} loading="lazy" width={56} height={56} className="w-14 h-14 rounded-full object-cover" />
-                      <div>
-                        <p className="font-bold text-foreground">{t.name}, {t.age}</p>
-                        <p className="text-sm text-muted-foreground">{t.role}</p>
-                      </div>
+
+          {/* Featured testimonial - Eduardo's mother */}
+          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} className="max-w-3xl mx-auto">
+            <Card className="border-2 border-primary/30 shadow-2xl hover:scale-[1.01] transition-transform duration-300 relative overflow-hidden">
+              <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-accent/5 pointer-events-none" />
+              <CardContent className="p-8 md:p-12 relative">
+                <div className="flex flex-col items-center text-center">
+                  <div className="relative mb-6">
+                    <div className="absolute inset-0 rounded-full blur-2xl bg-primary/30" />
+                    <div className="relative w-32 h-32 md:w-40 md:h-40 rounded-full bg-primary/20 border-4 border-primary/40 flex items-center justify-center overflow-hidden">
+                      <Heart className="w-16 h-16 text-primary fill-primary/40" />
                     </div>
-                    <div className="flex gap-1 mb-3">
-                      {Array(5).fill(0).map((_, j) => <Star key={j} className="w-4 h-4 fill-elderly-gold text-elderly-gold" />)}
+                  </div>
+                  <div className="flex gap-1 mb-4">
+                    {Array(5).fill(0).map((_, j) => <Star key={j} className="w-5 h-5 fill-elderly-gold text-elderly-gold" />)}
+                  </div>
+                  <p className="text-lg md:text-2xl text-foreground leading-relaxed mb-6 font-medium italic">
+                    "Meu filho criou esse aplicativo para mim. Agora nunca esqueço meus remédios, tenho o médico na ponta dos dedos e sei que se precisar de ajuda é só apertar um botão. Uso todo dia."
+                  </p>
+                  <p className="font-black text-foreground text-lg">Mãe do Eduardo</p>
+                  <p className="text-sm text-muted-foreground">Usuária do App do Idoso</p>
+                </div>
+              </CardContent>
+            </Card>
+            <p className="text-center text-sm text-muted-foreground mt-6 max-w-xl mx-auto">
+              Edu d'Olivée criou o App do Idoso para sua própria mãe. Hoje ela é a usuária número 1.
+            </p>
+          </motion.div>
+
+          {/* Additional real testimonials - hidden until real content is available */}
+          <div className="hidden md:grid-cols-3 gap-6 mt-12">
+            {[1, 2, 3].map((i) => (
+              <Card key={i} className="h-full border-border/50 shadow-md">
+                <CardContent className="p-6">
+                  <div className="flex items-center gap-4 mb-4">
+                    <div className="w-14 h-14 rounded-full bg-primary/20 flex items-center justify-center font-black text-primary">??</div>
+                    <div>
+                      <p className="font-bold text-foreground">[NOME REAL]</p>
+                      <p className="text-sm text-muted-foreground">[Descrição]</p>
                     </div>
-                    <p className="text-muted-foreground leading-relaxed">"{t.text}"</p>
-                  </CardContent>
-                </Card>
-              </motion.div>
+                  </div>
+                  <div className="flex gap-1 mb-3">
+                    {Array(5).fill(0).map((_, j) => <Star key={j} className="w-4 h-4 fill-elderly-gold text-elderly-gold" />)}
+                  </div>
+                  <p className="text-muted-foreground leading-relaxed">"[DEPOIMENTO REAL]"</p>
+                </CardContent>
+              </Card>
             ))}
           </div>
         </div>
@@ -501,13 +516,22 @@ export default function Index() {
                 <CardHeader className="text-center pb-2 pt-10">
                   <Users className="w-10 h-10 mx-auto text-primary mb-2" />
                   <CardTitle className="text-xl">Plano Familiar</CardTitle>
-                  <p className="text-muted-foreground text-sm">Até 3 usuários com contas individuais</p>
+                  <p className="text-muted-foreground text-sm">3 usuários com contas individuais completas</p>
                 </CardHeader>
                 <CardContent className="text-center">
-                  <div className="mb-6">
-                    <span className="text-4xl font-black text-foreground"><span className="text-4xl font-black text-foreground">R$ 54,60</span></span>
+                  <div className="mb-2 flex justify-center">
+                    <Badge className="bg-accent text-accent-foreground border-0 font-black tracking-wide">PAGUE 2, GANHE 3</Badge>
+                  </div>
+                  <div className="mb-2">
+                    <span className="text-base text-muted-foreground line-through">R$ 81,90/mês</span>
+                  </div>
+                  <div className="mb-2">
+                    <span className="text-4xl font-black text-foreground">R$ 54,60</span>
                     <span className="text-muted-foreground"> /mês</span>
                   </div>
+                  <p className="text-sm text-success font-bold mb-6">
+                    Você economiza R$ 27,30 todo mês — a 3ª assinatura é completamente grátis
+                  </p>
                   <ul className="text-left space-y-3 mb-8">
                     {[...planFeatures, "Gestão Familiar"].map((f, i) => (
                       <li key={i} className="flex items-center gap-2 text-sm text-muted-foreground">
@@ -531,6 +555,44 @@ export default function Index() {
               <p className="text-xs text-muted-foreground">Os descontos são aplicados automaticamente ao escolher o período no checkout</p>
             </div>
           </motion.div>
+        </div>
+      </section>
+
+      {/* FOUNDER STORY */}
+      <section className="py-16 md:py-24 bg-gradient-to-br from-primary/5 via-background to-accent/5 relative overflow-hidden">
+        <div className="container mx-auto px-4 relative z-10">
+          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-black text-foreground">
+              Por que criei o App do Idoso
+            </h2>
+          </motion.div>
+          <div className="grid md:grid-cols-[auto,1fr] gap-10 md:gap-14 items-center max-w-5xl mx-auto">
+            <motion.div initial={{ opacity: 0, scale: 0.9 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true }} transition={{ duration: 0.6 }} className="flex justify-center">
+              <div className="relative">
+                <div className="absolute inset-0 rounded-full blur-3xl bg-primary/60 scale-110 animate-pulse-glow" />
+                <div className="absolute inset-0 rounded-full blur-2xl bg-primary/40" style={{ boxShadow: "0 0 60px hsl(var(--primary) / 0.8)" }} />
+                <div className="relative w-56 h-56 md:w-64 md:h-64 rounded-full overflow-hidden border-4 border-primary/50 bg-gradient-to-br from-primary/30 to-primary/10" style={{ boxShadow: "0 0 50px hsl(var(--primary) / 0.6), inset 0 0 30px hsl(var(--primary) / 0.2)" }}>
+                  <img src={founderImg} alt="Eduardo d'Olivée, criador do App do Idoso" className="w-full h-full object-cover object-top" />
+                </div>
+              </div>
+            </motion.div>
+            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} className="text-center md:text-left">
+              <div className="space-y-4 text-base md:text-lg text-foreground/90 leading-relaxed">
+                <p>Sou <strong className="text-foreground">Eduardo d'Olivée</strong>, dentista há 30 anos e pai de uma família que conhece bem a preocupação de cuidar de quem envelhece.</p>
+                <p>Após o falecimento de meu pai, minha mãe veio morar comigo. Construí uma kitnet para ela em minha casa. Quando minha mãe começou a ter dificuldades para lembrar os remédios, as consultas e os médicos, percebi que não existia um aplicativo realmente simples, completo e feito com amor para ela.</p>
+                <p className="font-bold text-primary">Então criei um.</p>
+                <p>Ela usa todo dia. O botão SOS já a ajudou. Os lembretes de remédio funcionam. E o versículo bíblico da manhã virou parte da rotina dela.</p>
+                <p>Se você tem alguém assim na sua vida — pai, mãe, avó — o <strong className="text-foreground">App do Idoso</strong> foi feito para essa pessoa.</p>
+              </div>
+              <div className="mt-8 flex justify-center md:justify-start">
+                <Button asChild size="lg" className="rounded-full text-lg px-8 py-6 font-bold animate-pulse-glow">
+                  <a href={CTA_URL} target="_blank" rel="noopener noreferrer">
+                    <Play className="w-5 h-5 mr-2" /> Começar Meu Teste Grátis
+                  </a>
+                </Button>
+              </div>
+            </motion.div>
+          </div>
         </div>
       </section>
 
