@@ -515,13 +515,22 @@ export default function Index() {
                 <CardHeader className="text-center pb-2 pt-10">
                   <Users className="w-10 h-10 mx-auto text-primary mb-2" />
                   <CardTitle className="text-xl">Plano Familiar</CardTitle>
-                  <p className="text-muted-foreground text-sm">Até 3 usuários com contas individuais</p>
+                  <p className="text-muted-foreground text-sm">3 usuários com contas individuais completas</p>
                 </CardHeader>
                 <CardContent className="text-center">
-                  <div className="mb-6">
-                    <span className="text-4xl font-black text-foreground"><span className="text-4xl font-black text-foreground">R$ 54,60</span></span>
+                  <div className="mb-2 flex justify-center">
+                    <Badge className="bg-accent text-accent-foreground border-0 font-black tracking-wide">PAGUE 2, GANHE 3</Badge>
+                  </div>
+                  <div className="mb-2">
+                    <span className="text-base text-muted-foreground line-through">R$ 81,90/mês</span>
+                  </div>
+                  <div className="mb-2">
+                    <span className="text-4xl font-black text-foreground">R$ 54,60</span>
                     <span className="text-muted-foreground"> /mês</span>
                   </div>
+                  <p className="text-sm text-success font-bold mb-6">
+                    Você economiza R$ 27,30 todo mês — a 3ª assinatura é completamente grátis
+                  </p>
                   <ul className="text-left space-y-3 mb-8">
                     {[...planFeatures, "Gestão Familiar"].map((f, i) => (
                       <li key={i} className="flex items-center gap-2 text-sm text-muted-foreground">
