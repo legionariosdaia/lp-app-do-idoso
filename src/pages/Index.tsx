@@ -80,7 +80,7 @@ const features = [
   { title: "Remédios", icon: Pill, desc: "Controle todos os medicamentos com alarmes inteligentes. Envie a lista completa para o médico pelo WhatsApp com um toque.", screen: screenRemedios, neon: "#D97706" },
   { title: "SOS Emergência", icon: ShieldAlert, desc: "Botão de pânico que envia localização GPS em tempo real para todos os contatos de emergência via WhatsApp.", screen: screenSos, neon: "#DC2626" },
   { title: "Vacinas", icon: Syringe, desc: "Controle completo do calendário vacinal com doses, datas e lembretes automáticos.", screen: screenVacinas, neon: "#7C3AED" },
-  { title: "Mensagem do Dia", icon: MessageCircleHeart, desc: "Mensagem diária carinhosa e motivacional gerada por IA para alegrar o dia do idoso.", screen: screenMensagem, neon: "#EC4899" },
+  { title: "Mensagem do Dia", icon: MessageCircleHeart, desc: "Versículo bíblico diário e mensagem motivacional gerada por IA para alegrar e fortalecer o dia do seu idoso. Cuidado que alimenta o corpo e a alma.", screen: screenMensagem, neon: "#EC4899" },
   { title: "Chat Amigo", icon: Bot, desc: "Assistente virtual com IA que conversa, responde dúvidas, lê mensagens em voz alta e aceita comandos de voz.", screen: screenChat, neon: "#06B6D4" },
   { title: "Jogos Cognitivos", icon: Gamepad2, desc: "6 jogos para exercitar a memória e o raciocínio: Memória, Sudoku, Caça-Palavras, Jogo da Velha, Gênio e Trivia.", screen: screenJogos, neon: "#EA580C" },
 ];
