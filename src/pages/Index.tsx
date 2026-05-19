@@ -262,23 +262,9 @@ export default function Index() {
       {/* TRUST BAR */}
       <section className="bg-primary py-8">
         <div className="container mx-auto px-4">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-primary-foreground text-center">
-            {[
-              { emoji: "👴", label: "Usuários Ativos", value: 10000, prefix: "+" },
-              { emoji: "⭐", label: "Avaliação", value: 4.9, suffix: "", isDecimal: true },
-              { emoji: "🔒", label: "Seguro", value: 100, suffix: "%" },
-              { emoji: "❤️", label: "Feito no Brasil", value: 0, isStatic: true },
-            ].map((m, i) => (
-              <div key={i} className="flex flex-col items-center gap-1">
-                <span className="text-3xl">{m.emoji}</span>
-                <span className="text-2xl md:text-3xl font-black">
-                  {m.isStatic ? "🇧🇷" : m.isDecimal ? "4.9" : <><CountUp target={m.value} suffix={m.suffix || ""} /></>}
-                  {m.prefix && !m.isStatic && !m.isDecimal ? "" : ""}
-                </span>
-                <span className="text-sm font-semibold opacity-90">{m.label}</span>
-              </div>
-            ))}
-          </div>
+          <p className="text-primary-foreground text-center text-lg md:text-2xl font-black tracking-tight">
+            ✅ 7 dias grátis <span className="opacity-60 mx-2">•</span> ✅ Sem cartão de crédito <span className="opacity-60 mx-2">•</span> ✅ Cancele quando quiser
+          </p>
         </div>
       </section>
 
