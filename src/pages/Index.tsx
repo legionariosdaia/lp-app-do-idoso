@@ -387,31 +387,59 @@ export default function Index() {
       {/* TESTIMONIALS */}
       <section id="depoimentos" className="py-16 md:py-24 bg-muted/30">
         <div className="container mx-auto px-4">
-          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} className="text-center mb-16">
+          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-black text-foreground mb-4">
               Veja o que dizem sobre o App do Idoso
             </h2>
-            <p className="text-lg text-muted-foreground">Histórias reais de quem já transformou o cuidado com a saúde</p>
+            <p className="text-lg text-muted-foreground">A história real que originou tudo.</p>
           </motion.div>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {testimonials.map((t, i) => (
-              <motion.div key={i} initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp}>
-                <Card className="h-full hover:scale-[1.02] transition-transform duration-300 border-border/50 shadow-md">
-                  <CardContent className="p-6">
-                    <div className="flex items-center gap-4 mb-4">
-                      <img src={t.img} alt={t.name} loading="lazy" width={56} height={56} className="w-14 h-14 rounded-full object-cover" />
-                      <div>
-                        <p className="font-bold text-foreground">{t.name}, {t.age}</p>
-                        <p className="text-sm text-muted-foreground">{t.role}</p>
-                      </div>
+
+          {/* Featured testimonial - Eduardo's mother */}
+          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} className="max-w-3xl mx-auto">
+            <Card className="border-2 border-primary/30 shadow-2xl hover:scale-[1.01] transition-transform duration-300 relative overflow-hidden">
+              <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-accent/5 pointer-events-none" />
+              <CardContent className="p-8 md:p-12 relative">
+                <div className="flex flex-col items-center text-center">
+                  <div className="relative mb-6">
+                    <div className="absolute inset-0 rounded-full blur-2xl bg-primary/30" />
+                    <div className="relative w-32 h-32 md:w-40 md:h-40 rounded-full bg-primary/20 border-4 border-primary/40 flex items-center justify-center overflow-hidden">
+                      <Heart className="w-16 h-16 text-primary fill-primary/40" />
                     </div>
-                    <div className="flex gap-1 mb-3">
-                      {Array(5).fill(0).map((_, j) => <Star key={j} className="w-4 h-4 fill-elderly-gold text-elderly-gold" />)}
+                  </div>
+                  <div className="flex gap-1 mb-4">
+                    {Array(5).fill(0).map((_, j) => <Star key={j} className="w-5 h-5 fill-elderly-gold text-elderly-gold" />)}
+                  </div>
+                  <p className="text-lg md:text-2xl text-foreground leading-relaxed mb-6 font-medium italic">
+                    "Meu filho criou esse aplicativo para mim. Agora nunca esqueço meus remédios, tenho o médico na ponta dos dedos e sei que se precisar de ajuda é só apertar um botão. Uso todo dia."
+                  </p>
+                  <p className="font-black text-foreground text-lg">Mãe do Eduardo</p>
+                  <p className="text-sm text-muted-foreground">Usuária do App do Idoso</p>
+                </div>
+              </CardContent>
+            </Card>
+            <p className="text-center text-sm text-muted-foreground mt-6 max-w-xl mx-auto">
+              Edu d'Olivée criou o App do Idoso para sua própria mãe. Hoje ela é a usuária número 1.
+            </p>
+          </motion.div>
+
+          {/* Additional real testimonials - hidden until real content is available */}
+          <div className="hidden grid md:grid-cols-3 gap-6 mt-12">
+            {[1, 2, 3].map((i) => (
+              <Card key={i} className="h-full border-border/50 shadow-md">
+                <CardContent className="p-6">
+                  <div className="flex items-center gap-4 mb-4">
+                    <div className="w-14 h-14 rounded-full bg-primary/20 flex items-center justify-center font-black text-primary">??</div>
+                    <div>
+                      <p className="font-bold text-foreground">[NOME REAL]</p>
+                      <p className="text-sm text-muted-foreground">[Descrição]</p>
                     </div>
-                    <p className="text-muted-foreground leading-relaxed">"{t.text}"</p>
-                  </CardContent>
-                </Card>
-              </motion.div>
+                  </div>
+                  <div className="flex gap-1 mb-3">
+                    {Array(5).fill(0).map((_, j) => <Star key={j} className="w-4 h-4 fill-elderly-gold text-elderly-gold" />)}
+                  </div>
+                  <p className="text-muted-foreground leading-relaxed">"[DEPOIMENTO REAL]"</p>
+                </CardContent>
+              </Card>
             ))}
           </div>
         </div>
