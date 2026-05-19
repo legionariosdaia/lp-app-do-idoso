@@ -558,6 +558,44 @@ export default function Index() {
         </div>
       </section>
 
+      {/* FOUNDER STORY */}
+      <section className="py-16 md:py-24 bg-gradient-to-br from-primary/5 via-background to-accent/5 relative overflow-hidden">
+        <div className="container mx-auto px-4 relative z-10">
+          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-black text-foreground">
+              Por que criei o App do Idoso
+            </h2>
+          </motion.div>
+          <div className="grid md:grid-cols-[auto,1fr] gap-10 md:gap-14 items-center max-w-5xl mx-auto">
+            <motion.div initial={{ opacity: 0, scale: 0.9 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true }} transition={{ duration: 0.6 }} className="flex justify-center">
+              <div className="relative">
+                <div className="absolute inset-0 rounded-full blur-3xl bg-primary/60 scale-110 animate-pulse-glow" />
+                <div className="absolute inset-0 rounded-full blur-2xl bg-primary/40" style={{ boxShadow: "0 0 60px hsl(var(--primary) / 0.8)" }} />
+                <div className="relative w-56 h-56 md:w-64 md:h-64 rounded-full overflow-hidden border-4 border-primary/50 bg-gradient-to-br from-primary/30 to-primary/10" style={{ boxShadow: "0 0 50px hsl(var(--primary) / 0.6), inset 0 0 30px hsl(var(--primary) / 0.2)" }}>
+                  <img src={founderImg} alt="Eduardo d'Olivée, criador do App do Idoso" className="w-full h-full object-cover object-top" />
+                </div>
+              </div>
+            </motion.div>
+            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} className="text-center md:text-left">
+              <div className="space-y-4 text-base md:text-lg text-foreground/90 leading-relaxed">
+                <p>Sou <strong className="text-foreground">Eduardo d'Olivée</strong>, dentista há 30 anos e pai de uma família que conhece bem a preocupação de cuidar de quem envelhece.</p>
+                <p>Após o falecimento de meu pai, minha mãe veio morar comigo. Construí uma kitnet para ela em minha casa. Quando minha mãe começou a ter dificuldades para lembrar os remédios, as consultas e os médicos, percebi que não existia um aplicativo realmente simples, completo e feito com amor para ela.</p>
+                <p className="font-bold text-primary">Então criei um.</p>
+                <p>Ela usa todo dia. O botão SOS já a ajudou. Os lembretes de remédio funcionam. E o versículo bíblico da manhã virou parte da rotina dela.</p>
+                <p>Se você tem alguém assim na sua vida — pai, mãe, avó — o <strong className="text-foreground">App do Idoso</strong> foi feito para essa pessoa.</p>
+              </div>
+              <div className="mt-8 flex justify-center md:justify-start">
+                <Button asChild size="lg" className="rounded-full text-lg px-8 py-6 font-bold animate-pulse-glow">
+                  <a href={CTA_URL} target="_blank" rel="noopener noreferrer">
+                    <Play className="w-5 h-5 mr-2" /> Começar Meu Teste Grátis
+                  </a>
+                </Button>
+              </div>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
       {/* FAQ */}
       <section id="faq" className="py-16 md:py-24">
         <div className="container mx-auto px-4 max-w-3xl">
