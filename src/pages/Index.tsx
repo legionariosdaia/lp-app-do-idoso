@@ -194,7 +194,7 @@ export default function Index() {
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <motion.div initial="hidden" animate="visible" variants={fadeUp}>
               <Badge className="bg-accent/20 text-accent-foreground border-accent text-sm px-4 py-1.5 mb-6 font-semibold" style={{ color: "hsl(var(--foreground))" }}>
-                ✨ +10.000 famílias já confiam no App do Idoso
+                ✨ Aplicativo feito com amor para quem envelhece
               </Badge>
               <h1 className="text-3xl md:text-5xl lg:text-6xl font-black text-foreground leading-tight mb-6">
                 Cuide de quem sempre cuidou de você.{" "}
@@ -578,10 +578,10 @@ export default function Index() {
             </motion.div>
             <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} className="text-center md:text-left">
               <div className="space-y-4 text-base md:text-lg text-foreground/90 leading-relaxed">
-                <p>Sou <strong className="text-foreground">Eduardo d'Olivée</strong>, dentista há 30 anos e pai de uma família que conhece bem a preocupação de cuidar de quem envelhece.</p>
+                <p>Sou <strong className="text-foreground">Edu d'Olivée</strong>. Sou dentista há 30 anos e pai de família que conhece bem a preocupação de cuidar de quem envelhece. Em 2022 comecei meu estudo de Tecnologia Digital. Fiz o curso CS50 de Harvard e desenvolvi o conhecimento de Programação e Inteligência Artificial...</p>
                 <p>Após o falecimento de meu pai, minha mãe veio morar comigo. Construí uma kitnet para ela em minha casa. Quando minha mãe começou a ter dificuldades para lembrar os remédios, as consultas e os médicos, percebi que não existia um aplicativo realmente simples, completo e feito com amor para ela.</p>
                 <p className="font-bold text-primary">Então criei um.</p>
-                <p>Ela usa todo dia. O botão SOS já a ajudou. Os lembretes de remédio funcionam. E o versículo bíblico da manhã virou parte da rotina dela.</p>
+                <p>O Chat Amigo é Mega Inteligente e virou o maior companheiro dela, ela pode conversar sobre qualquer assunto, e ele guarda tudo em sua memória para continuar sua conversa. Até receita de bolo ela já criou com ele. Ela usa todo dia. O botão SOS já a ajudou. Os lembretes de remédio funcionam. E o versículo bíblico da manhã virou parte da rotina dela.</p>
                 <p>Se você tem alguém assim na sua vida — pai, mãe, avó — o <strong className="text-foreground">App do Idoso</strong> foi feito para essa pessoa.</p>
               </div>
               <div className="mt-8 flex justify-center md:justify-start">
@@ -636,7 +636,7 @@ export default function Index() {
                 Começar Meu Teste Grátis Agora
               </a>
             </Button>
-            <p className="mt-6 text-primary-foreground/80 font-semibold">Mais de 10.000 famílias já confiam em nós ❤️</p>
+            <p className="mt-6 text-primary-foreground/80 font-semibold">Cuide com amor, cuide com o App do Idoso ❤️</p>
           </motion.div>
         </div>
       </section>
