@@ -32,6 +32,7 @@ import screenMensagem from "@/assets/screen-mensagem.png";
 import screenChat from "@/assets/screen-chat.png";
 import screenJogos from "@/assets/screen-jogos.png";
 import founderImg from "@/assets/founder-eduardo.png";
+import principalUsuariaImg from "@/assets/principal-usuaria.jpg";
 
 const CTA_URL = "https://appdoidoso.com.br";
 const WHATSAPP_URL = "https://wa.me/5511940750736";
@@ -390,7 +391,7 @@ export default function Index() {
         <div className="container mx-auto px-4">
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-black text-foreground mb-4">
-              Veja o que dizem sobre o App do Idoso
+              O que Diz a Principal Usuária do Aplicativo
             </h2>
             <p className="text-lg text-muted-foreground">A história real que originou tudo.</p>
           </motion.div>
@@ -404,7 +405,7 @@ export default function Index() {
                   <div className="relative mb-6">
                     <div className="absolute inset-0 rounded-full blur-2xl bg-primary/30" />
                     <div className="relative w-32 h-32 md:w-40 md:h-40 rounded-full bg-primary/20 border-4 border-primary/40 flex items-center justify-center overflow-hidden">
-                      <Heart className="w-16 h-16 text-primary fill-primary/40" />
+                      <img src={principalUsuariaImg} alt="Mãe do Eduardo usando o App do Idoso" className="w-full h-full object-cover" />
                     </div>
                   </div>
                   <div className="flex gap-1 mb-4">
