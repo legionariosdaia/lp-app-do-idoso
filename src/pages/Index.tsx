@@ -32,6 +32,7 @@ import screenMensagem from "@/assets/screen-mensagem.png";
 import screenChat from "@/assets/screen-chat.png";
 import screenJogos from "@/assets/screen-jogos.png";
 import founderImg from "@/assets/founder-eduardo.png";
+import principalUsuariaImg from "@/assets/principal-usuaria.jpg";
 
 const CTA_URL = "https://appdoidoso.com.br";
 const WHATSAPP_URL = "https://wa.me/5511940750736";
