@@ -414,7 +414,8 @@ export default function Index() {
                   <p className="text-lg md:text-2xl text-foreground leading-relaxed mb-6 font-medium italic">
                     "Meu filho criou esse aplicativo para mim. Agora nunca esqueço meus remédios, tenho o médico na ponta dos dedos e sei que se precisar de ajuda é só apertar um botão. Uso todo dia."
                   </p>
-                  <p className="font-black text-foreground text-lg">Mãe do Eduardo</p>
+                  <p className="font-black text-foreground text-xl">Suely d'Oliveira</p>
+                  <p className="font-semibold text-foreground text-lg">Mãe do Eduardo</p>
                   <p className="text-sm text-muted-foreground">Usuária do App do Idoso</p>
                 </div>
               </CardContent>
