@@ -391,7 +391,7 @@ export default function Index() {
         <div className="container mx-auto px-4">
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-black text-foreground mb-4">
-              Veja o que dizem sobre o App do Idoso
+              O que Diz a Principal Usuária do Aplicativo
             </h2>
             <p className="text-lg text-muted-foreground">A história real que originou tudo.</p>
           </motion.div>
