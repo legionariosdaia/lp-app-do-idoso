@@ -364,7 +364,7 @@ export default function Index() {
                     if (!doctorName.trim()) return;
                     const nome = doctorName.trim();
                     const msg = encodeURIComponent(
-                      `Olá! Sou o Dr(a). ${nome} e tenho uma dica especial para você e sua família. 💙\n\n` +
+                      `Olá! Aqui é o Dr(a). ${nome} e tenho uma dica especial para você e sua família. 💙\n\n` +
                       `Conheça o *App do Idoso* — um aplicativo feito com muito carinho para ajudar no cuidado diário da saúde de quem a gente ama.\n\n` +
                       `Com ele é possível:\n` +
                       `✅ Controlar medicamentos com alarmes inteligentes\n` +
