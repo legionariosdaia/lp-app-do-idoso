@@ -405,7 +405,7 @@ export default function Index() {
                   <div className="relative mb-6">
                     <div className="absolute inset-0 rounded-full blur-2xl bg-primary/30" />
                     <div className="relative w-32 h-32 md:w-40 md:h-40 rounded-full bg-primary/20 border-4 border-primary/40 flex items-center justify-center overflow-hidden">
-                      <Heart className="w-16 h-16 text-primary fill-primary/40" />
+                      <img src={principalUsuariaImg} alt="Mãe do Eduardo usando o App do Idoso" className="w-full h-full object-cover" />
                     </div>
                   </div>
                   <div className="flex gap-1 mb-4">
