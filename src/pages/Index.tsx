@@ -355,16 +355,29 @@ export default function Index() {
                     Indique para seus pacientes <ChevronRight className="w-5 h-5 ml-2" />
                   </Button>
                 </DialogTrigger>
-                <DialogContent className="rounded-2xl">
+                <DialogContent className="rounded-2xl max-w-md">
                   <DialogHeader>
                     <DialogTitle className="text-xl font-black text-foreground">Qual o seu nome?</DialogTitle>
                   </DialogHeader>
                   <form onSubmit={(e) => {
                     e.preventDefault();
                     if (!doctorName.trim()) return;
-                    const msg = encodeURIComponent(`Olá! ${doctorName.trim()} indicou o App do Idoso para você. Um aplicativo completo para gestão da saúde de idosos: medicamentos, consultas, vacinas, SOS e muito mais. Experimente grátis por 7 dias: http://appdoidoso.com.br`);
+                    const nome = doctorName.trim();
+                    const msg = encodeURIComponent(
+                      `Olá! Sou o Dr(a). ${nome} e tenho uma dica especial para você e sua família. 💙\n\n` +
+                      `Conheça o *App do Idoso* — um aplicativo feito com muito carinho para ajudar no cuidado diário da saúde de quem a gente ama.\n\n` +
+                      `Com ele é possível:\n` +
+                      `✅ Controlar medicamentos com alarmes inteligentes\n` +
+                      `✅ Organizar consultas e médicos\n` +
+                      `✅ Apertar um botão SOS em emergências\n` +
+                      `✅ Receber mensagens motivacionais todos os dias\n` +
+                      `✅ E muito mais...\n\n` +
+                      `👉 Teste *grátis por 7 dias* (sem cartão de crédito): https://lp.appdoidoso.com.br\n\n` +
+                      `Com carinho,\n` +
+                      `Dr(a). ${nome}`
+                    );
                     const url = `https://wa.me/?text=${msg}`;
-                    if (window.top) { window.top.open(url, "_blank"); } else { window.open(url, "_blank"); }
+                    window.open(url, "_blank");
                     setDoctorModalOpen(false);
                     setDoctorName("");
                   }} className="flex flex-col gap-4">
