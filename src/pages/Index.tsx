@@ -595,11 +595,17 @@ export default function Index() {
             </motion.div>
             <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} className="text-center md:text-left">
               <div className="space-y-4 text-base md:text-lg text-foreground/90 leading-relaxed">
-                <p>Sou <strong className="text-foreground">Edu d'Olivée</strong>. Sou dentista há 30 anos e pai de família que conhece bem a preocupação de cuidar de quem envelhece. Em 2022 comecei meu estudo de Tecnologia Digital. Fiz o curso CS50 de Harvard e desenvolvi o conhecimento de Programação e Inteligência Artificial...</p>
-                <p>Após o falecimento de meu pai, minha mãe veio morar comigo. Construí uma kitnet para ela em minha casa. Quando minha mãe começou a ter dificuldades para lembrar os remédios, as consultas e os médicos, percebi que não existia um aplicativo realmente simples, completo e feito com amor para ela.</p>
-                <p className="font-bold text-primary">Então criei um.</p>
-                <p>O Chat Amigo é Mega Inteligente e virou o maior companheiro dela, ela pode conversar sobre qualquer assunto, e ele guarda tudo em sua memória para continuar sua conversa. Até receita de bolo ela já criou com ele. Ela usa todo dia. O botão SOS já a ajudou. Os lembretes de remédio funcionam. E o versículo bíblico da manhã virou parte da rotina dela.</p>
-                <p>Se você tem alguém assim na sua vida — pai, mãe, avó — o <strong className="text-foreground">App do Idoso</strong> foi feito para essa pessoa.</p>
+                <p>Sou <strong className="text-foreground">Edu d'Olivée</strong>. Dentista há 30 anos, pai de família e cristão.</p>
+                <p>Em 2022, comecei a estudar Tecnologia Digital — fiz o curso de Ciência da Computação de Harvard e mergulhei em Programação e Inteligência Artificial.</p>
+                <p>Mas o App do Idoso não nasceu da tecnologia. Nasceu de um papel na carteira.</p>
+                <p>Quando meu pai faleceu, minha mãe veio morar comigo. Construí uma casinha para ela dentro da minha casa. Ela era renal crônica, diabética, hipertensa e tinha hipotireoidismo — mais de 20 remédios divididos em 3 horários por dia, além de consultas, vacinas e compromissos médicos constantes.</p>
+                <p>Sem nenhuma experiência em cuidar de um idoso, eu andava com um papel na carteira com a lista de remédios dela. Era assim que eu vivia. Até que percebi que não existia um aplicativo realmente simples, completo e feito com amor para resolver isso.</p>
+                <p className="font-bold text-primary">Então criei um que supriu todas as necessidades de organização da vida dela.</p>
+                <p>O Chat Amigo virou o maior companheiro da minha mãe — mega inteligente, ela podia conversar sobre qualquer assunto e ele guardava tudo na memória para continuar a conversa. Até receita de bolo ela criou com ele.</p>
+                <p>Os lembretes de remédio funcionavam. E o versículo bíblico da manhã virou parte da rotina dela.</p>
+                <p>Minha mãe faleceu em 12 de junho de 2026, com 79 anos — a mesma idade e o mesmo dia em que meu pai.</p>
+                <p>Eu cumpri minha missão com ela. Mas a missão do App do Idoso não terminou — e meu propósito só ficou maior.</p>
+                <p>Se você tem alguém assim na sua vida — pai, mãe, avó, alguém que depende de remédios, de cuidado, de presença — o <strong className="text-foreground">App do Idoso</strong> foi feito para essa pessoa. Para que você nunca precise andar com um papel na carteira. E para que ela sempre tenha alguém cuidando, mesmo a distância.</p>
               </div>
               <div className="mt-8 flex justify-center md:justify-start">
                 <Button asChild size="lg" className="rounded-full text-lg px-8 py-6 font-bold animate-pulse-glow">
