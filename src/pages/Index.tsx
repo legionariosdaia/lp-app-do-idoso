@@ -111,6 +111,7 @@ const audiences = [
 const faqs = [
   { q: "O App do Idoso é difícil de usar?", a: "Não! O app foi projetado especialmente para idosos, com letras grandes, botões coloridos e acessíveis, e um assistente virtual que lê tudo em voz alta. Qualquer pessoa consegue usar." },
   { q: "Preciso de internet para usar?", a: "Sim, é necessário conexão com a internet para acessar todas as funcionalidades. Mas é muito leve e funciona bem até com internet lenta." },
+  { q: "Como instalo o App do Idoso no meu celular?", a: "É muito simples. Basta você acessar appdoidoso.com.br no navegador do seu celular e cadastre-se em \"Crie Aqui\". Após entrar no App do Idoso clique os 3 pontinhos em cima do lado do navegador, e clique em \"Adicionar à tela inicial\". Aguarde um pouco e o aplicativo será instalado. Caso não apareça o ícone nos seus aplicativos do celular, clique de novo nos 3 pontinhos e de novo em \"Adicionar à tela inicial\". Depois coloque o ícone na sua tela inicial para facilidade de acesso todos os dias." },
   { q: "Posso cancelar a qualquer momento?", a: "Sim! Você pode cancelar sua assinatura a qualquer momento, sem taxas ou multas." },
   { q: "O botão SOS funciona sem internet?", a: "O botão SOS precisa de internet para enviar a localização via WhatsApp. Recomendamos que o idoso tenha dados móveis ativados." },
   { q: "Quantas pessoas podem usar o plano familiar?", a: "O plano familiar permite até 3 usuários, cada um com sua conta individual, medicamentos e consultas separados." },
