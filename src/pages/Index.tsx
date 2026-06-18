@@ -430,12 +430,13 @@ export default function Index() {
                   </p>
                   <p className="font-black text-foreground text-xl">Suely d'Oliveira</p>
                   <p className="font-semibold text-foreground text-lg">Mãe do Eduardo</p>
-                  <p className="text-sm text-muted-foreground">Usuária do App do Idoso</p>
+                  <p className="text-sm text-muted-foreground">Usuária em vida do App do Idoso</p>
                 </div>
               </CardContent>
             </Card>
             <p className="text-center text-sm text-muted-foreground mt-6 max-w-xl mx-auto">
-              Edu d'Olivée criou o App do Idoso para sua própria mãe. Hoje ela é a usuária número 1.
+              Edu d'Olivée criou o App do Idoso para sua própria mãe.<br />
+              Em memória de Suely d'Oliveira (Falecida aos 79 anos em 12/06/2026)
             </p>
           </motion.div>
 
