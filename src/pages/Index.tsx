@@ -219,44 +219,17 @@ export default function Index() {
             </motion.div>
 
             <motion.div initial={{ opacity: 0, x: 40 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.8, delay: 0.3 }}>
-              {videoUrl ? (
-                <div className="rounded-2xl overflow-hidden shadow-2xl border-2 border-primary/20" style={{ boxShadow: "0 0 40px rgba(37,99,235,0.2)" }}>
-                  <div className="relative w-full" style={{ paddingBottom: "56.25%" }}>
-                    <iframe src={getYouTubeEmbedUrl(videoUrl) || ""} className="absolute inset-0 w-full h-full" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen title="VSL App do Idoso" />
-                  </div>
+              <div className="rounded-2xl overflow-hidden shadow-2xl border-2 border-primary/20" style={{ boxShadow: "0 0 40px rgba(37,99,235,0.2)" }}>
+                <div className="relative w-full" style={{ paddingBottom: "56.25%" }}>
+                  <iframe
+                    src="https://www.youtube.com/embed/eYNaQdn7C94?autoplay=1&mute=1&loop=1&playlist=eYNaQdn7C94&controls=1&rel=0&modestbranding=1&playsinline=1"
+                    className="absolute inset-0 w-full h-full"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
+                    title="VSL App do Idoso"
+                  />
                 </div>
-              ) : (
-                <Dialog>
-                  <DialogTrigger asChild>
-                    <div className="relative rounded-2xl overflow-hidden cursor-pointer group" style={{ boxShadow: "0 0 40px rgba(37,99,235,0.15)" }}>
-                      <img src={heroImg} alt="Idoso feliz usando o App do Idoso" width={1920} height={1080} className="w-full h-auto" />
-                      <div className="absolute inset-0 bg-foreground/30 flex flex-col items-center justify-center gap-3 group-hover:bg-foreground/40 transition-colors">
-                        <div className="w-20 h-20 rounded-full bg-primary flex items-center justify-center shadow-xl">
-                          <Play className="w-10 h-10 text-primary-foreground ml-1" />
-                        </div>
-                        <p className="text-primary-foreground font-bold text-lg text-center px-4">Assista e descubra como o App do Idoso pode transformar sua vida</p>
-                      </div>
-                    </div>
-                  </DialogTrigger>
-                  <DialogContent className="sm:max-w-md">
-                    <DialogHeader>
-                      <DialogTitle>Adicionar Vídeo do YouTube</DialogTitle>
-                    </DialogHeader>
-                    <div className="flex flex-col gap-4">
-                      <input
-                        type="text"
-                        placeholder="Cole a URL do YouTube aqui..."
-                        value={videoInput}
-                        onChange={e => setVideoInput(e.target.value)}
-                        className="w-full px-4 py-3 rounded-lg border border-input bg-background text-foreground text-base"
-                      />
-                      <Button onClick={() => { if (videoInput) setVideoUrl(videoInput); }} className="rounded-full font-bold">
-                        Adicionar Vídeo
-                      </Button>
-                    </div>
-                  </DialogContent>
-                </Dialog>
-              )}
+              </div>
             </motion.div>
           </div>
         </div>
