@@ -128,10 +128,14 @@ const planFeatures = [
 
 export default function Index() {
   const [mobileOpen, setMobileOpen] = useState(false);
-  const [videoUrl, setVideoUrl] = useState("");
-  const [videoInput, setVideoInput] = useState("");
+  const [videoStarted, setVideoStarted] = useState(false);
   const [doctorModalOpen, setDoctorModalOpen] = useState(false);
   const [doctorName, setDoctorName] = useState("");
+
+  useEffect(() => {
+    const t = setTimeout(() => setVideoStarted(true), 2000);
+    return () => clearTimeout(t);
+  }, []);
 
   const scrollTo = (id: string) => {
     document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
