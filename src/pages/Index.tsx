@@ -128,10 +128,14 @@ const planFeatures = [
 
 export default function Index() {
   const [mobileOpen, setMobileOpen] = useState(false);
-  const [videoUrl, setVideoUrl] = useState("");
-  const [videoInput, setVideoInput] = useState("");
+  const [videoStarted, setVideoStarted] = useState(false);
   const [doctorModalOpen, setDoctorModalOpen] = useState(false);
   const [doctorName, setDoctorName] = useState("");
+
+  useEffect(() => {
+    const t = setTimeout(() => setVideoStarted(true), 2000);
+    return () => clearTimeout(t);
+  }, []);
 
   const scrollTo = (id: string) => {
     document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
@@ -221,13 +225,22 @@ export default function Index() {
             <motion.div initial={{ opacity: 0, x: 40 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.8, delay: 0.3 }}>
               <div className="rounded-2xl overflow-hidden shadow-2xl border-2 border-primary/20" style={{ boxShadow: "0 0 40px rgba(37,99,235,0.2)" }}>
                 <div className="relative w-full" style={{ paddingBottom: "56.25%" }}>
-                  <iframe
-                    src="https://www.youtube.com/embed/eYNaQdn7C94?autoplay=1&mute=1&loop=1&playlist=eYNaQdn7C94&controls=1&rel=0&modestbranding=1&playsinline=1"
-                    className="absolute inset-0 w-full h-full"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                    allowFullScreen
-                    title="VSL App do Idoso"
-                  />
+                  {videoStarted ? (
+                    <iframe
+                      src="https://www.youtube.com/embed/eYNaQdn7C94?autoplay=1&mute=1&loop=1&playlist=eYNaQdn7C94&controls=1&rel=0&modestbranding=1&playsinline=1"
+                      className="absolute inset-0 w-full h-full"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                      allowFullScreen
+                      title="VSL App do Idoso"
+                    />
+                  ) : (
+                    <img
+                      src="https://i.ytimg.com/vi/eYNaQdn7C94/maxresdefault.jpg"
+                      alt="VSL App do Idoso"
+                      className="absolute inset-0 w-full h-full object-cover"
+                      onError={(e) => { (e.currentTarget as HTMLImageElement).src = "https://i.ytimg.com/vi/eYNaQdn7C94/hqdefault.jpg"; }}
+                    />
+                  )}
                 </div>
               </div>
             </motion.div>
