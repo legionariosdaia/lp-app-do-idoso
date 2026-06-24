@@ -12,6 +12,7 @@ import { Badge } from "@/components/ui/badge";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
+import { LegalLinks } from "@/components/LegalDialogs";
 
 import heroImg from "@/assets/hero-elderly-happy.jpg";
 import sosImg from "@/assets/sos-section.jpg";
@@ -671,12 +672,7 @@ export default function Index() {
             </div>
             <div>
               <h4 className="font-bold mb-3">Legal</h4>
-              <ul className="space-y-2 text-sm text-background/60">
-                <li><a href="#" className="hover:text-background transition-colors">Termos de Uso</a></li>
-                <li><a href="#" className="hover:text-background transition-colors">Política de Privacidade</a></li>
-                <li><a href="#" className="hover:text-background transition-colors">Política de Reembolso</a></li>
-                <li><a href="#" className="hover:text-background transition-colors">LGPD</a></li>
-              </ul>
+              <LegalLinks />
             </div>
             <div>
               <h4 className="font-bold mb-3">Contato</h4>
