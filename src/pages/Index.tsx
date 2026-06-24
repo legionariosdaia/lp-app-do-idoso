@@ -227,7 +227,7 @@ export default function Index() {
                 <div className="relative w-full" style={{ paddingBottom: "56.25%" }}>
                   {videoStarted ? (
                     <iframe
-                      src="https://www.youtube.com/embed/eYNaQdn7C94?autoplay=1&mute=1&loop=1&playlist=eYNaQdn7C94&controls=1&rel=0&modestbranding=1&playsinline=1"
+                      src="https://www.youtube.com/embed/eYNaQdn7C94?autoplay=1&mute=1&controls=1&rel=0&modestbranding=1&playsinline=1"
                       className="absolute inset-0 w-full h-full"
                       allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                       allowFullScreen
