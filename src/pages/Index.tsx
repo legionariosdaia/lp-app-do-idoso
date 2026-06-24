@@ -35,7 +35,10 @@ import screenJogos from "@/assets/screen-jogos.png";
 import founderImg from "@/assets/founder-eduardo.png";
 import principalUsuariaImg from "@/assets/principal-usuaria.jpg";
 
-const CTA_URL = "https://appdoidoso.com.br";
+const CTA_BASE = "https://appdoidoso.com.br";
+const ctaUrl = (medium: string, campaign = "app-do-idoso") =>
+  `${CTA_BASE}?utm_source=lp&utm_medium=${medium}&utm_campaign=${campaign}`;
+const CTA_URL = ctaUrl("hero");
 const WHATSAPP_URL = "https://wa.me/5511940750736";
 
 const fadeUp = {
@@ -83,7 +86,7 @@ const features = [
   { title: "Remédios", icon: Pill, desc: "Controle todos os medicamentos com alarmes inteligentes. Envie a lista completa para o médico pelo WhatsApp com um toque.", screen: screenRemedios, neon: "#D97706" },
   { title: "SOS Emergência", icon: ShieldAlert, desc: "Botão de pânico que envia localização GPS em tempo real para todos os contatos de emergência via WhatsApp.", screen: screenSos, neon: "#DC2626" },
   { title: "Vacinas", icon: Syringe, desc: "Controle completo do calendário vacinal com doses, datas e lembretes automáticos.", screen: screenVacinas, neon: "#7C3AED" },
-  { title: "Mensagem do Dia", icon: MessageCircleHeart, desc: "Versículo bíblico diário e mensagem motivacional gerada por IA para alegrar e fortalecer o dia do seu idoso. Cuidado que alimenta o corpo e a alma.", screen: screenMensagem, neon: "#EC4899" },
+  { title: "Mensagem do Dia", icon: MessageCircleHeart, desc: "Mensagem motivacional diária gerada por IA, com um versículo bíblico. Cuidado que alimenta o corpo e a alma.", screen: screenMensagem, neon: "#EC4899" },
   { title: "Chat Amigo", icon: Bot, desc: "Assistente virtual com IA que conversa, responde dúvidas, lê mensagens em voz alta e aceita comandos de voz.", screen: screenChat, neon: "#06B6D4" },
   { title: "Jogos Cognitivos", icon: Gamepad2, desc: "6 jogos para exercitar a memória e o raciocínio: Memória, Sudoku, Caça-Palavras, Jogo da Velha, Gênio e Trivia.", screen: screenJogos, neon: "#EA580C" },
 ];
@@ -119,6 +122,8 @@ const faqs = [
   { q: "Meus dados estão seguros?", a: "Sim! Utilizamos criptografia de ponta e servidores seguros. Seus dados de saúde são protegidos e nunca compartilhados com terceiros." },
   { q: "Funciona no iPhone e Android?", a: "O App do Idoso é um aplicativo web progressivo (PWA) que funciona em qualquer celular com navegador de internet, seja iPhone, Android ou tablet." },
   { q: "Posso usar mesmo não sendo idoso?", a: "Claro! Qualquer pessoa que toma muitos medicamentos, tem várias consultas ou precisa se organizar com a saúde pode usar o App do Idoso." },
+  { q: "Meus dados estão protegidos pela LGPD?", a: "Sim. O App do Idoso segue integralmente a Lei Geral de Proteção de Dados (LGPD). Seus dados e os dados do seu familiar são criptografados, armazenados com segurança e nunca compartilhados com terceiros. Você pode solicitar a exclusão dos seus dados a qualquer momento." },
+  { q: "Posso cadastrar mais de um idoso?", a: "Sim! Com o Plano Familiar, você gerencia até 3 contas individuais completas — ideal para cuidar do pai, da mãe e de outro familiar ao mesmo tempo. Cada um tem seu próprio perfil com remédios, consultas e configurações independentes." },
 ];
 
 const planFeatures = [
@@ -171,7 +176,7 @@ export default function Index() {
               </button>
             ))}
             <Button asChild className="rounded-full px-6 font-bold">
-              <a href={CTA_URL} target="_blank" rel="noopener noreferrer">Começar Agora</a>
+              <a href={ctaUrl("navbar")} target="_blank" rel="noopener noreferrer">Começar Agora</a>
             </Button>
           </div>
           <Sheet open={mobileOpen} onOpenChange={setMobileOpen}>
@@ -186,7 +191,7 @@ export default function Index() {
                   </button>
                 ))}
                 <Button asChild className="rounded-full font-bold w-full">
-                  <a href={CTA_URL} target="_blank" rel="noopener noreferrer">Começar Agora</a>
+                  <a href={ctaUrl("navbar")} target="_blank" rel="noopener noreferrer">Começar Agora</a>
                 </Button>
               </div>
             </SheetContent>
@@ -201,18 +206,18 @@ export default function Index() {
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <motion.div initial="hidden" animate="visible" variants={fadeUp}>
               <Badge className="bg-accent/20 text-accent-foreground border-accent text-sm px-4 py-1.5 mb-6 font-semibold" style={{ color: "hsl(var(--foreground))" }}>
-                ✨ Aplicativo feito com amor para quem envelhece
+                ✨ Criado por um filho para a própria mãe
               </Badge>
               <h1 className="text-3xl md:text-5xl lg:text-6xl font-black text-foreground leading-tight mb-6">
                 Cuide de quem sempre cuidou de você.{" "}
                 <span className="text-primary">Com carinho, tecnologia e segurança.</span>
               </h1>
               <p className="text-lg md:text-xl text-muted-foreground mb-8 leading-relaxed">
-                O aplicativo mais completo para gestão da saúde, medicamentos, consultas e segurança de idosos. Simples de usar, feito com amor.
+                Remédios, consultas, emergência e companhia — tudo num app simples, feito com amor para quem você mais ama.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 mb-4">
                 <Button asChild size="lg" className="rounded-full text-lg px-8 py-6 font-bold animate-pulse-glow">
-                  <a href={CTA_URL} target="_blank" rel="noopener noreferrer">
+                  <a href={ctaUrl("hero")} target="_blank" rel="noopener noreferrer">
                     <Play className="w-5 h-5 mr-2" /> Começar Teste Grátis de 7 Dias
                   </a>
                 </Button>
@@ -228,7 +233,7 @@ export default function Index() {
                 <div className="relative w-full" style={{ paddingBottom: "56.25%" }}>
                   {videoStarted ? (
                     <iframe
-                      src="https://www.youtube.com/embed/eYNaQdn7C94?autoplay=1&mute=0&controls=1&rel=0&modestbranding=1&playsinline=1"
+                      src="https://www.youtube.com/embed/XeHjuGIdddE?autoplay=1&mute=0&controls=1&rel=0&modestbranding=1&playsinline=1"
                       className="absolute inset-0 w-full h-full"
                       allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                       allowFullScreen
@@ -236,10 +241,10 @@ export default function Index() {
                     />
                   ) : (
                     <img
-                      src="https://i.ytimg.com/vi/eYNaQdn7C94/maxresdefault.jpg"
+                      src="https://i.ytimg.com/vi/XeHjuGIdddE/maxresdefault.jpg"
                       alt="VSL App do Idoso"
                       className="absolute inset-0 w-full h-full object-cover"
-                      onError={(e) => { (e.currentTarget as HTMLImageElement).src = "https://i.ytimg.com/vi/eYNaQdn7C94/hqdefault.jpg"; }}
+                      onError={(e) => { (e.currentTarget as HTMLImageElement).src = "https://i.ytimg.com/vi/XeHjuGIdddE/hqdefault.jpg"; }}
                     />
                   )}
                 </div>
@@ -266,7 +271,7 @@ export default function Index() {
               Tudo que seu idoso precisa, na palma da mão
             </h2>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              8 funções essenciais projetadas com letras grandes, botões acessíveis e cores de alto contraste
+              8 funções essenciais com letras grandes e botões acessíveis — feitas para quem não tem intimidade com tecnologia.
             </p>
           </motion.div>
           <div className="grid md:grid-cols-2 gap-12 md:gap-16">
@@ -309,7 +314,7 @@ export default function Index() {
                 Com um único toque, o App do Idoso envia a localização exata em tempo real para todos os contatos de emergência via WhatsApp. Para idosos com Alzheimer, mobilidade reduzida ou que moram sozinhos — é paz de espírito para toda a família.
               </p>
               <Button asChild size="lg" className="rounded-full bg-destructive hover:bg-destructive/90 text-destructive-foreground font-bold text-lg px-8 py-6">
-                <a href={CTA_URL} target="_blank" rel="noopener noreferrer">
+                <a href={ctaUrl("sos")} target="_blank" rel="noopener noreferrer">
                   <ShieldAlert className="w-5 h-5 mr-2" /> Proteja quem você ama
                 </a>
               </Button>
@@ -340,7 +345,7 @@ export default function Index() {
               <Dialog open={doctorModalOpen} onOpenChange={setDoctorModalOpen}>
                 <DialogTrigger asChild>
                   <Button size="lg" className="rounded-full font-bold text-lg px-8 py-6">
-                    Indique para seus pacientes <ChevronRight className="w-5 h-5 ml-2" />
+                    Envie o App para seus pacientes <ChevronRight className="w-5 h-5 ml-2" />
                   </Button>
                 </DialogTrigger>
                 <DialogContent className="rounded-2xl max-w-md">
@@ -506,8 +511,9 @@ export default function Index() {
                     ))}
                   </ul>
                   <Button asChild variant="outline" className="w-full rounded-full font-bold text-base py-5">
-                    <a href={CTA_URL} target="_blank" rel="noopener noreferrer">Começar Teste Grátis</a>
+                    <a href={ctaUrl("pricing", "individual")} target="_blank" rel="noopener noreferrer">Começar Teste Grátis</a>
                   </Button>
+                  <p className="text-xs text-muted-foreground mt-3">Sem cartão de crédito. Cancele quando quiser.</p>
                 </CardContent>
               </Card>
             </motion.div>
@@ -533,8 +539,11 @@ export default function Index() {
                     <span className="text-4xl font-black text-foreground">R$ 54,60</span>
                     <span className="text-muted-foreground"> /mês</span>
                   </div>
-                  <p className="text-sm text-success font-bold mb-6">
+                  <p className="text-sm text-success font-bold mb-1">
                     Você economiza R$ 27,30 todo mês — a 3ª assinatura é completamente grátis
+                  </p>
+                  <p className="text-sm text-success font-bold mb-6">
+                    Economize R$ 327,60 por ano com a 3ª assinatura grátis.
                   </p>
                   <ul className="text-left space-y-3 mb-8">
                     {[...planFeatures, "Gestão Familiar"].map((f, i) => (
@@ -544,8 +553,9 @@ export default function Index() {
                     ))}
                   </ul>
                   <Button asChild className="w-full rounded-full font-bold text-base py-5">
-                    <a href={CTA_URL} target="_blank" rel="noopener noreferrer">Começar Teste Grátis</a>
+                    <a href={ctaUrl("pricing", "familiar")} target="_blank" rel="noopener noreferrer">Começar Teste Grátis</a>
                   </Button>
+                  <p className="text-xs text-muted-foreground mt-3">Sem cartão de crédito. Cancele quando quiser.</p>
                 </CardContent>
               </Card>
             </motion.div>
@@ -596,7 +606,7 @@ export default function Index() {
               </div>
               <div className="mt-8 flex justify-center md:justify-start">
                 <Button asChild size="lg" className="rounded-full text-lg px-8 py-6 font-bold animate-pulse-glow">
-                  <a href={CTA_URL} target="_blank" rel="noopener noreferrer">
+                  <a href={ctaUrl("story")} target="_blank" rel="noopener noreferrer">
                     <Play className="w-5 h-5 mr-2" /> Começar Meu Teste Grátis
                   </a>
                 </Button>
@@ -639,10 +649,10 @@ export default function Index() {
               Comece hoje. Cuide com amor.<br />Cuide com o App do Idoso.
             </h2>
             <p className="text-xl text-primary-foreground/90 mb-8">
-              7 dias grátis. Sem compromisso. Sem cartão de crédito.
+              7 dias grátis. Sem cartão. Sem compromisso. Comece em menos de 2 minutos.
             </p>
             <Button asChild size="lg" variant="outline" className="rounded-full text-lg px-10 py-7 font-black bg-primary-foreground text-primary hover:bg-primary-foreground/90 border-0 shadow-xl">
-              <a href={CTA_URL} target="_blank" rel="noopener noreferrer">
+              <a href={ctaUrl("cta-final")} target="_blank" rel="noopener noreferrer">
                 Começar Meu Teste Grátis Agora
               </a>
             </Button>
@@ -692,7 +702,7 @@ export default function Index() {
           </div>
           <div className="border-t border-background/20 pt-6 text-center text-sm text-background/50">
             <p className="mb-1">Edu d'Olivee Negócios Digitais Ltda • CNPJ: 58.345.667/0001-06</p>
-            <p>© 2025 App do Idoso. Todos os direitos reservados.</p>
+            <p>© 2026 App do Idoso. Todos os direitos reservados.</p>
           </div>
         </div>
       </footer>
