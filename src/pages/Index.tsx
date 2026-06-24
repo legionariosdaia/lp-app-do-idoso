@@ -12,6 +12,7 @@ import { Badge } from "@/components/ui/badge";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
+import { LegalLinks } from "@/components/LegalDialogs";
 
 import heroImg from "@/assets/hero-elderly-happy.jpg";
 import sosImg from "@/assets/sos-section.jpg";
